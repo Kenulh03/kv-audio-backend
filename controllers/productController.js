@@ -1,4 +1,4 @@
-import product from "../models/product.js"
+import Product from "../models/product.js"
 
 export function addProduct(req,res){
     console.log(req.user)
