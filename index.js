@@ -14,7 +14,7 @@ app.use((req,res,next) => {
     //created the auth
 
     if(token !=null){
-        token = token.replace("Bearer","");
+        token = token.replace("Bearer ","");
         jwt.verify(token,"kv-secret-89!",(err,decoded) =>{
             if(!err){
                 req.user = decoded;
