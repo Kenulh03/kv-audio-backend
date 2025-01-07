@@ -5,7 +5,6 @@ import userRouter from './routes/userRoute.js';
 import jwt from "jsonwebtoken";
 import productRouter from './routes/productRouter.js';
 import dotenv from "dotenv";
-import env from 'env';
 import reviewRouter from './routes/reviewRouter.js';
 
 dotenv.config();
@@ -20,7 +19,7 @@ app.use((req,res,next) => {
 
     if(token !=null){
         token = token.replace("Bearer ","");
-        jwt.verify(token,env.JWT_SECRET,(err,decoded) =>{
+        jwt.verify(token,process.env.JWT_SECRET,(err,decoded) =>{
             if(!err){
                 req.user = decoded;
             }
@@ -29,7 +28,8 @@ app.use((req,res,next) => {
     next()
 });
 
-let mongoUrl = process.env.MONGO_URL;
+let mongoUrl = 
+    process.env.MONGO_URL;
 
 mongoose.connect(mongoUrl)
 
