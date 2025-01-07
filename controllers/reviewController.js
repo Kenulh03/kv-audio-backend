@@ -37,7 +37,7 @@ export function getReviews(req,res) {
     }
 
     if(user.role == "admin"){
-        Review.fnd().then((reviews) => {
+        Review.find().then((reviews) => {
             res.json(reviews);
         });
     }
