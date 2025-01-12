@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
         required:true
     },
     availability :{
-        type:boolean,
+        type:Boolean,
         required:true,
         default:true
     },
