@@ -18,6 +18,8 @@ export async function addInquiry(req,res){
                 id = inquiries[0].id + 1;
             }
 
+            data.id = id;
+            
             const newInquiry = new Inquiry(data);
             const response = await newInquiry.save();
 
@@ -28,7 +30,7 @@ export async function addInquiry(req,res){
         }
     }catch(e){
         res.status(500).json({
-            message:"Failed to add inquiry"
+            message:"Failed to add inquiry",
         })
     }
 }
