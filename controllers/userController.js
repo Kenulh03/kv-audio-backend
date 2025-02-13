@@ -5,40 +5,22 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export async function registerUser(req,res){
-    
-    if(req.user == null){
-        res.status(401).json({
-            message: "Please login and try again"
-        })
-        return
-    }
-    if(req.user.role !="admin"){
-        res.status(403).json({
-            message: "you are not authorized to perform this action"
-        })
-        return
-    }
-    
+export function registerUser(req, res) {
     const data = req.body;
-
-    data.password = bcrypt.hashSync(data.password,10)
-
-    const newUser = new User(data)
-
-    // newUser.save().then(()=>{
-    //     res.json({message: "User registered successfully"})
-    // }).catch((error)=>{
-    //     res.status(500).json({error : "User registration failed"})
-    // })
-
-    try{
-        await newUser.save()
-        res.json({message: "User registered successfully"})
-    }catch(error){
-        res.status(500).json({error : "User registration failed"})
-    }
-}
+  
+    data.password = bcrypt.hashSync(data.password, 10);
+    //#
+    const newUser = new User(data);
+  
+    newUser
+      .save()
+      .then(() => {
+        res.json({ message: "User registered successfully" });
+      })
+      .catch((error) => {
+        res.status(500).json({ error: "User registration failed" });
+      });
+  }
 
 export function loginUser(req,res){
     const data = req.body;
