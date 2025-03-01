@@ -94,3 +94,22 @@ export async function deleteProduct(req,res){
         })
     }
 }
+
+export async function getProduct(req,res){
+    try{
+        const key = req.params.key;
+        const product = await Product.findOne({key:key});
+        if(product==null){
+            res.status(404).json({
+                message: "Product not found"
+            })
+            return;
+        }
+        res.json(product)
+        return;
+    }catch{
+        res.status(500).json({
+            message:"Failed to get product"
+        })
+    }
+}
