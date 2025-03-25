@@ -1,5 +1,6 @@
 import Order from "../models/order.js";
 import Product from "../models/product.js";
+import { isItAdmin, isItCustomer } from "./userController.js";
 
 export async function createOrder(req,res){
     const data = req.body;
@@ -166,7 +167,7 @@ export async function getOrders(req,res){
     }
 } 
 export async function approveOrRejectOrder(req,res){
-    const orrderId = req.params.orderId;
+    const orderId = req.params.orderId;
     const status = req.body.status;
 
     if(isItAdmin(req)){
