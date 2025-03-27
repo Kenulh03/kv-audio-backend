@@ -200,3 +200,11 @@ export async function approveOrRejectOrder(req,res){
 		res.status(403).json({error: "Unauthorized"});
 	}
 }
+export async function countPendingOrders(req, res) {
+    try {
+        const count = await Order.countDocuments({ status: "Pending" });
+        res.json(count);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to count pending orders" });
+    }
+}
