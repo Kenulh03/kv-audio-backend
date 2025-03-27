@@ -276,3 +276,12 @@ export async function verifyOTP(req,res){
         res.status(200).json({message : "Email verified successfully"})
     }
 }
+
+export async function getUserCount(req, res) {
+    try {
+        const count = await User.countDocuments();
+        res.json({ count });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to fetch user count" });
+    }
+}

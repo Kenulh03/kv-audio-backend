@@ -113,3 +113,14 @@ export async function getProduct(req,res){
         })
     }
 }
+
+export async function getItemCount(req, res) {
+    try {
+        const count = await Product.countDocuments();
+        console.log("Item count:", count);
+        res.json({ count });
+    } catch (error) {
+        console.error("Error fetching item count:", error);
+        res.status(500).json({ error: "Failed to fetch items count" });
+    }
+}
