@@ -278,10 +278,14 @@ export async function verifyOTP(req,res){
 }
 
 export async function getUserCount(req, res) {
+   if(isItAdmin){
     try {
         const count = await User.countDocuments();
         res.json({ count });
     } catch (error) {
         res.status(500).json({ error: "Failed to fetch user count" });
     }
+   }else{
+    res.status(403).json({error: "Unauthorized"});
+   }
 }

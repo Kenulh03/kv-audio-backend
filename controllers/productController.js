@@ -115,6 +115,7 @@ export async function getProduct(req,res){
 }
 
 export async function getItemCount(req, res) {
+   if(isItAdmin){
     try {
         const count = await Product.countDocuments();
         console.log("Item count:", count);
@@ -123,4 +124,7 @@ export async function getItemCount(req, res) {
         console.error("Error fetching item count:", error);
         res.status(500).json({ error: "Failed to fetch items count" });
     }
+   }else{
+    res.status(403).json({error: "Unauthorized"});
+   }
 }

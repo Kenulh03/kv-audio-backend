@@ -7,5 +7,5 @@ orderRouter.post("/",createOrder)
 orderRouter.post("/quote", getQuote)
 orderRouter.get("/",getOrders)
  orderRouter.put("/status/:orderId",approveOrRejectOrder)
- orderRouter.post("/count",countPendingOrders)
+ orderRouter.get("/count",countPendingOrders)
 export default orderRouter;

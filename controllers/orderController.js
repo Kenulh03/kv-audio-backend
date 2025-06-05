@@ -201,10 +201,14 @@ export async function approveOrRejectOrder(req,res){
 	}
 }
 export async function countPendingOrders(req, res) {
-    try {
-        const count = await Order.countDocuments({ status: "Pending" });
-        res.json(count);
-    } catch (error) {
-        res.status(500).json({ error: "Failed to count pending orders" });
+    if (isItAdmin(req)) {
+        try {
+            const count = await Order.countDocuments({ status: "Pending" });
+            res.json(count);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to count pending orders" });
+        }  
+    }else{
+        res.status(403).json({error: "Unauthorized"});
     }
 }
